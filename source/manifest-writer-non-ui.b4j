@@ -7,7 +7,7 @@ NumberOfLibraries=1
 NumberOfModules=0
 Version=10.3
 @EndOfDesignText@
-'Version: 2.10
+'Version: 2.11
 #Region Project Attributes
 #If Debug
 #CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version add.1
@@ -29,7 +29,7 @@ Sub Process_Globals
 End Sub
 
 Sub AppStart (Args() As String)
-	Log("Manifest writer v2.10 started...")
+	Log("Manifest writer v2.11 started...")
 	Log("Reading args...")
 	For i = 0 To Args.Length - 1
 		Args(i) = Args(i).Replace("%20", " ")
@@ -61,6 +61,8 @@ Sub AppStart (Args() As String)
 	Select Args.Length
 		Case 2
 			Log("No changes")
+			Log("Manifest writer ended")
+			ExitApplication
 		Case 4, 6, 8, 10
 			For i = 2 To Args.Length - 1 Step 2 ' start from 3rd parameter
 				'Log(Args(i) & " = " & Args(i+1))
