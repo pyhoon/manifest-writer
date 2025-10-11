@@ -15,12 +15,13 @@ Version=10.3
 #CommandLineArgs:
 #End If
 #MergeLibraries: True
-#Macro: Title, Version, ide://run?file=%JAVABIN%\java.exe&Args=-jar&Args=%ADDITIONAL%\..\B4X\manifest-writer-non-ui.jar&Args=%PROJECT%\..\release&Args=%PROJECT%\..\release&Args=Version&Args=add.1
+#Region Macros
+#Macro: Title, Version, ide://run?file=%JAVABIN%\java.exe&Args=-jar&Args=%ADDITIONAL%\..\B4X\manifest-writer.jar&Args=%PROJECT%&Args=%PROJECT%&Args=Version&Args=add.1
 #Macro: Title, Release, ide://run?file=%WINDIR%\SysWOW64\explorer.exe&Args=%PROJECT%\..\release
-'#Macro: Title, Copy (B4Xlib), ide://run?file=%COMSPEC%&Args=/c&Args=copy&Args=%PROJECT%\MyClass.bas&Args=%PROJECT%\..\release\MyClass.bas
-'#Macro: Title, Publish (B4Xlib), ide://run?file=%JAVABIN%\jar.exe&WorkingDirectory=..\..\release&Args=-cMf&Args=%ADDITIONAL%\%PROJECT_NAME%.b4xlib&Args=*
+#End Region
 #If Release
-#CustomBuildAction: 2, %COMSPEC%, /c copy %PROJECT%\Objects\result.jar %ADDITIONAL%\..\B4X\manifest-writer-non-ui.jar
+#CustomBuildAction: 2, %COMSPEC%, /c copy %PROJECT%\Objects\result.jar %PROJECT%\..\release\manifest-writer.jar
+#CustomBuildAction: 2, %COMSPEC%, /c copy %PROJECT%\Objects\result.jar %ADDITIONAL%\..\B4X\manifest-writer.jar
 #End If
 #End Region
 
