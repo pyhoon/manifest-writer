@@ -1,4 +1,4 @@
-# manifest-writer-non-ui-b4j
+# Manifest Writer
 
 Write or update manifest.txt for b4xlib distribution
 
