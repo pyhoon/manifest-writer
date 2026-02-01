@@ -7,10 +7,12 @@ NumberOfLibraries=1
 NumberOfModules=0
 Version=10.3
 @EndOfDesignText@
-'Version: 2.11
+'Version: 2.20
 #Region Project Attributes
 #If Debug
-#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version add.1
+'#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version add.1
+'#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version 2.20 B4A.DependsOn JSON,B4XCollections B4i.DependsOn iJson,B4XCollections B4J.DependsOn Json,B4XCollections CustomClassTemplates MiniHtml+View+(Main)|MainView
+#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version 2.20 B4A.DependsOn - B4i.DependsOn - B4J.DependsOn - CustomClassTemplates - CustomClassTemplates MiniHtml+View+(Main)|MainView DependsOn B4XCollections
 #Else
 #CommandLineArgs:
 #End If
@@ -30,10 +32,11 @@ Sub Process_Globals
 End Sub
 
 Sub AppStart (Args() As String)
-	Log("Manifest writer v2.11 started...")
+	Log("Manifest writer v2.20 started...")
 	Log("Reading args...")
 	For i = 0 To Args.Length - 1
 		Args(i) = Args(i).Replace("%20", " ")
+		Args(i) = Args(i).Replace("+", " ")
 		Log($"${i+1}: ${Args(i)}"$)
 	Next
 	If Args.Length < 2 Then
@@ -59,23 +62,23 @@ Sub AppStart (Args() As String)
 			items.Put(entry(0), entry(1))
 		End If
 	Next
-	Select Args.Length
-		Case 2
-			Log("No changes")
-			Log("Manifest writer ended")
-			ExitApplication
-		Case 4, 6, 8, 10
+	Select True
+		Case Args.Length Mod 2 = 0 ' even numbers of args
+			If Args.Length = 2 Then ' at least 4 args or above
+				Log("No changes")
+				Log("Manifest writer ended")
+				ExitApplication
+			End If
 			For i = 2 To Args.Length - 1 Step 2 ' start from 3rd parameter
 				'Log(Args(i) & " = " & Args(i+1))
-				' Auto increment version
-				If Args(i) = "Version" And Args(i+1).StartsWith("add") Then
+				If Args(i) = "Version" And Args(i+1).StartsWith("add") Then ' Auto increment version
 					Dim CurrentVersion As Float = IIf(items.GetDefault("Version", "") = "", 0, items.Get("Version"))
 					'Log(Args(i+1).SubString(3))
 					Dim increment As Float = Args(i+1).SubString(3)
 					Dim NewVersion As String = NumberFormat2(CurrentVersion + increment, 1, 2, 2, False)
-					'Log(CurrentVersion)
-					'Log(NewVersion)
 					items.Put(Args(i), NewVersion)
+				Else If Args(i+1) = "-" Then ' remove unused keys
+					items.Remove(Args(i))
 				Else
 					items.Put(Args(i), Args(i+ 1))
 				End If
