@@ -5,14 +5,14 @@ Library1=jcore
 NumberOfFiles=0
 NumberOfLibraries=1
 NumberOfModules=0
-Version=10.3
+Version=10.7
 @EndOfDesignText@
-'Version: 2.20
+'Version: 2.21
 #Region Project Attributes
 #If Debug
 '#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version add.1
-'#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version 2.20 B4A.DependsOn JSON,B4XCollections B4i.DependsOn iJson,B4XCollections B4J.DependsOn Json,B4XCollections CustomClassTemplates MiniHtml+View+(Main)|MainView
-#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version 2.20 B4A.DependsOn - B4i.DependsOn - B4J.DependsOn - CustomClassTemplates - CustomClassTemplates MiniHtml+View+(Main)|MainView DependsOn B4XCollections
+'#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j\release C:\B4X\Development\manifest-writer-non-ui-b4j\release Author Aeric Version 2.21 B4A.DependsOn JSON,B4XCollections B4i.DependsOn iJson,B4XCollections B4J.DependsOn Json,B4XCollections CustomClassTemplates MiniHtml+View+(Main)|MainView
+#CommandLineArgs: C:\B4X\Development\manifest-writer-non-ui-b4j C:\B4X\Development\manifest-writer-non-ui-b4j Author Aeric Version 2.21 B4A.DependsOn - B4i.DependsOn - B4J.DependsOn - CustomClassTemplates - CustomClassTemplates MiniHtml+View+(Main)|MainView DependsOn B4XCollections
 #Else
 #CommandLineArgs:
 #End If
@@ -32,7 +32,7 @@ Sub Process_Globals
 End Sub
 
 Sub AppStart (Args() As String)
-	Log("Manifest writer v2.20 started...")
+	Log("Manifest writer v2.21 started...")
 	Log("Reading args...")
 	For i = 0 To Args.Length - 1
 		Args(i) = Args(i).Replace("%20", " ")
@@ -99,7 +99,7 @@ Sub AppStart (Args() As String)
 	For Each Key As String In items.Keys
 		SB.Append($"${Key}=${items.Get(Key)}"$).Append(CRLF)
 	Next
-	File.WriteString(Destination, "manifest.txt", SB.ToString.Trim)
+	File.WriteString(Destination, "manifest.txt", SB.ToString)
 	Log("Manifest writer ended")
 	ExitApplication
 End Sub
